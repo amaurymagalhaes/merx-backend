@@ -11,10 +11,11 @@ const routes = new Router();
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
-routes.post('/balance', BalanceController.store);
 
 routes.use(authMiddleware);
 
+routes.get('/balance/:id', BalanceController.show);
+routes.post('/balance', BalanceController.store);
 routes.get('/user/byId/:id', UserController.showId);
 routes.get('/user/byUsername/:username', UserController.showUser);
 routes.get('/transaction/:id', TransactionsController.show);

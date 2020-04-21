@@ -24,35 +24,31 @@ class TransactionsController {
         .status(400)
         .json({ error: 'Source and Destiny can not be the same.' });
     }
+    const BalanceSource = await Balance.findOne({
+      where: { id: req.body.source_id },
+    });
+
+    if (BalanceSource.amount < req.body.amount) {
+      return res.status(400).json({
+        error: 'Source does not have the amount for the transaction.',
+      });
+    }
 
     const { id, amount, source_id, destiny_id } = await Transactions.create(
       req.body
     );
 
-    async function calculateBalance(
-      amount,
-      transactionId,
-      userSource,
-      userDestiny
-    ) {
-      const BalanceSource = await Balance.findOne({
-        where: { id: userSource },
-      });
-      const BalanceDestiny = await Balance.findOne({
-        where: { id: userDestiny },
-      });
-
-      BalanceSource.update({
-        last_transaction_id: transactionId,
-        amount: BalanceSource.amount - amount,
-      });
-      BalanceDestiny.update({
-        last_transaction_id: transactionId,
-        amount: BalanceSource.amount + amount,
-      });
-    }
-
-    calculateBalance(amount, id, source_id, destiny_id);
+    const BalanceDestiny = await Balance.findOne({
+      where: { id: destiny_id },
+    });
+    BalanceSource.update({
+      last_transaction_id: id,
+      amount: BalanceSource.amount - amount,
+    });
+    BalanceDestiny.update({
+      last_transaction_id: id,
+      amount: BalanceDestiny.amount + amount,
+    });
 
     return res.json({
       id,
