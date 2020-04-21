@@ -2,14 +2,20 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('balance', {
+    return queryInterface.createTable('balances', {
       id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+      },
+
+      user_id: {
         references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
       },
       amount: {
         type: Sequelize.FLOAT,
