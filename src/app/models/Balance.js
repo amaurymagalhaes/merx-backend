@@ -6,6 +6,7 @@ class Balance extends Model {
       {
         amount: Sequelize.FLOAT,
         last_transaction_id: Sequelize.INTEGER,
+        user_id: Sequelize.INTEGER
       },
       { sequelize }
     );
