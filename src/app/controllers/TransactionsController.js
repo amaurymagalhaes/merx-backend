@@ -52,7 +52,7 @@ class TransactionsController {
       });
     }
 
-    calculateBalance(amount, id, source_id, userDestiny);
+    calculateBalance(amount, id, source_id, destiny_id);
 
     return res.json({
       id,

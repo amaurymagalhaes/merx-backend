@@ -42,8 +42,8 @@ class UserController {
 
     await Balance.create({
       amount: 0,
-      last_transaction_id: 0,
-      id: id,
+      last_transaction_id: null,
+      user_id: id,
     });
 
     return res.json({
@@ -59,7 +59,6 @@ class UserController {
 
   async update(req, res) {
     const { username, email, phone, oldPassword, name } = req.body;
-    console.log(req.body);
 
     const user = await User.findByPk(req.userId);
 
