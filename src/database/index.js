@@ -5,7 +5,7 @@ import Balance from '../app/models/Balance';
 import User from '../app/models/User';
 import Transactions from '../app/models/Transactions';
 
-const models = [Balance, User, Transactions];
+const models = [User, Transactions, Balance];
 
 class Database {
   constructor() {
