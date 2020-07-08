@@ -2,30 +2,26 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('balances', {
+    return queryInterface.createTable('friendships', {
       id: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
       },
-
-      user_id: {
+      user_id_1: {
+        type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        type: Sequelize.INTEGER,
-        allowNull: false,
+        onDelete: 'CASCADE',
+        allowNull: true,
       },
-      amount: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      last_transaction_id: {
+      user_id_2: {
         type: Sequelize.INTEGER,
-        references: { model: 'transactions', key: 'id' },
+        references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -39,6 +35,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('balance');
+    return queryInterface.dropTable('friendships');
   },
 };

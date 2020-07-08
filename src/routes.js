@@ -2,8 +2,9 @@ import { Router } from 'express';
 
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
-import TransactionsController from './app/controllers/TransactionsController';
+import TransactionController from './app/controllers/TransactionController';
 import BalanceController from './app/controllers/BalanceController';
+import FriendshipController from './app/controllers/FriendshipController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -16,11 +17,13 @@ routes.use(authMiddleware);
 
 routes.get('/balance/:id', BalanceController.show);
 routes.post('/balance', BalanceController.store);
+routes.post('/friendship', FriendshipController.store);
+routes.get('/friendship/:id', FriendshipController.show);
 routes.get('/user/byId/:id', UserController.showId);
 routes.get('/user/byUsername/:username', UserController.showUser);
-routes.get('/transaction/:id', TransactionsController.show);
-routes.post('/transactions', TransactionsController.store);
-routes.get('/transactions', TransactionsController.index);
+routes.get('/transaction/:id', TransactionController.show);
+routes.post('/transaction', TransactionController.store);
+routes.get('/transactions', TransactionController.index);
 routes.put('/users', UserController.update);
 
 export default routes;

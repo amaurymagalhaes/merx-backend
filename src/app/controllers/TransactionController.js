@@ -1,4 +1,4 @@
-import Transactions from '../models/Transactions';
+import Transaction from '../models/Transaction';
 import User from '../models/User';
 import Balance from '../models/Balance';
 import { Op } from 'sequelize';
@@ -59,18 +59,18 @@ class TransactionsController {
   }
 
   async index(req, res) {
-    const transactions = await Transactions.findAll({
+    const transaction = await Transaction.findAll({
       where: {
         [Op.or]: [{ destiny_id: req.userId }, { source_id: req.userId }],
       },
       order: ['created_at'],
     });
 
-    return res.json(transactions);
+    return res.json(transaction);
   }
 
   async show(req, res) {
-    const transaction = await Transactions.findByPk(req.params.id);
+    const transaction = await Transaction.findByPk(req.params.id);
 
     return res.json(transaction);
   }

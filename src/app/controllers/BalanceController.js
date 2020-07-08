@@ -1,6 +1,6 @@
 import Balance from '../models/Balance';
 import User from '../models/User';
-import Transactions from '../models/Transactions';
+import Transaction from '../models/Transaction';
 
 class BalanceController {
   async store(req, res) {
