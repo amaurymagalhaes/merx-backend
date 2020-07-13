@@ -34,7 +34,7 @@ class TransactionsController {
       });
     }
 
-    const { id, amount, source_id, destiny_id } = await Transactions.create(
+    const { id, amount, source_id, destiny_id } = await Transaction.create(
       req.body
     );
 

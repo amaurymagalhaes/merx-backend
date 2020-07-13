@@ -21,6 +21,14 @@ class FriendshipController {
     return res.status(200).json('Amizade criada com sucesso.');
   }
 
+  async delete(req, res) {
+    const friendship_id = await Friendship.destroy({
+      where: { id: req.params.id },
+    });
+
+    return res.json('Amizade desfeita com sucesso.');
+  }
+
   async show(req, res) {
     const friendship = await Friendship.findByPk(req.params.id);
 

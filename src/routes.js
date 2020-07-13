@@ -19,6 +19,7 @@ routes.get('/balance/:id', BalanceController.show);
 routes.post('/balance', BalanceController.store);
 routes.post('/friendship', FriendshipController.store);
 routes.get('/friendship/:id', FriendshipController.show);
+routes.delete('/friendship/:id', FriendshipController.delete);
 routes.get('/user/byId/:id', UserController.showId);
 routes.get('/user/byUsername/:username', UserController.showUser);
 routes.get('/transaction/:id', TransactionController.show);
